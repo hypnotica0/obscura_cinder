@@ -10,7 +10,7 @@ version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = modid
+    archivesName = mod_id
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -76,7 +76,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                'obscura_ch1' {
+                mod_id {
                     source sourceSets.main
                 }
             }
@@ -84,13 +84,13 @@ minecraft {
 
         client {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', modid
+            property 'forge.enabledGameTestNamespaces', mod_id
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
         }
 
         server {
-            property 'forge.enabledGameTestNamespaces', modid
+            property 'forge.enabledGameTestNamespaces', mod_id
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             args '--nogui'
@@ -100,17 +100,17 @@ minecraft {
         // By default, the server will crash when no gametests are provided.
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
-            property 'forge.enabledGameTestNamespaces', modid
+            property 'forge.enabledGameTestNamespaces', mod_id
         }
 
         data {
             // example of overriding the workingDirectory set in configureEach above
-            workingDirectory project.file('runData')
+            workingDirectory project.file('run-data')
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'obscura_ch1', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
         }
     }
 }
@@ -160,7 +160,7 @@ tasks.named('processResources', ProcessResources).configure {
             minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
             forge_version       : forge_version, forge_version_range: forge_version_range,
             loader_version_range: loader_version_range,
-            mod_id              : modid, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors         : mod_authors, mod_description: mod_description,
     ]
     inputs.properties replaceProperties
@@ -174,7 +174,7 @@ tasks.named('processResources', ProcessResources).configure {
 tasks.named('jar', Jar).configure {
     manifest {
         attributes([
-                'Specification-Title'     : modid,
+                'Specification-Title'     : mod_id,
                 'Specification-Vendor'    : mod_authors,
                 'Specification-Version'   : '1', // We are version 1 of ourselves
                 'Implementation-Title'    : project.name,

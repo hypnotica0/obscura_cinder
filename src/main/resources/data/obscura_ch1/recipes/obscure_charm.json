@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " # ",
+    "#$#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "$": {
+      "item": "obscura_ch1:obscure_gem"
+    }
+  },
+  "result": {
+    "item": "obscura_ch1:obscure_charm",
+    "count": 1
+  }
+}
